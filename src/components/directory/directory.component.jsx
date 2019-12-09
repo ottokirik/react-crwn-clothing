@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 
 import MenuItem from '../menu-item';
 
 import './directory.styles.sass';
 
-const Directory = () => {
-    const [sections, setSection] = useState([
-        {
+class Directory extends Component {
+    state = {
+      sections: [{
           title: 'hats',
           imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
           id: 1,
@@ -37,16 +37,23 @@ const Directory = () => {
           size: 'large',
           id: 5,
           linkUrl: 'shop/mens'
-        }
-    ]);
+        }]
+    }
 
-    return (<div className="directory-menu">
-        {
-            sections.map(({ id, title, imageUrl, size='' }) => (
-                <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
-            ))
-        }
-    </div>);
+    render() {
+      const { sections } = this.state;
+
+      return (
+        <div className="directory-menu">
+          {
+              sections.map(({ id, ...otherSectionProps }) => (
+                  <MenuItem 
+                    key={id} 
+                    { ...otherSectionProps } />
+              ))
+          }
+        </div>)
+    };
 };
 
 export default Directory;
