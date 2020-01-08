@@ -5,6 +5,8 @@ import './sign-in.styles.sass';
 import FormInput from './../form-input';
 import CustomButton from './../custom-button';
 
+import { signInWithGoogle } from './../../firebase/firebase.utils';
+
 class SignIn extends Component {
 
     state = {
@@ -50,8 +52,10 @@ class SignIn extends Component {
                         required 
                         handleChange={ this.handleChange }
                         label="Password" />
-
-                    <CustomButton type="submit"> Sign In </CustomButton>
+                    <div className="buttons">
+                        <CustomButton type="submit"> Sign In </CustomButton>
+                        <CustomButton onClick={ signInWithGoogle } isGoogleSignIn> Sign In with Google </CustomButton>
+                    </div>
                 </form>
             </div>
         );
