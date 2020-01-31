@@ -19,8 +19,25 @@ class App extends Component {
   componentDidMount() {
     //Подписка на событие входа/выхода пользователя в Firebase
     //возвращает функцию для закрытия соединения
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-      await createUserProfileDocument(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        //Событие изменения объекта
+        userRef.onSnapshot(snapShot => {
+          const { id } = snapShot;
+          this.setState({
+            currentUser: {
+              id,
+              ...snapShot.data()
+            }
+          });
+        });
+      } else {
+        this.setState({
+          currentUser: userAuth
+        });
+      }
     });
   }
 

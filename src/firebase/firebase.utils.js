@@ -12,6 +12,7 @@ const config = {
   appId: "1:710126089949:web:4ee89b09562e075a4f4d34"
 };
 
+//Проверяет, если пользователя нет в БД, то создает его и сохраняет
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
