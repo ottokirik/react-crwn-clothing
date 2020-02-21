@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import "./cart-item.styles.sass";
+import './cart-item.styles.sass';
 
 const CartItem = ({ item: { imageUrl, name, price, quantity } }) => (
   <div className="cart-item">
