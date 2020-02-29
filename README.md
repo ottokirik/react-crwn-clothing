@@ -8,10 +8,11 @@
 - React
 - Redux
 - React-redux
+- Redux-persist
 - Reselect
 - Sass
 - Firebase
 
-[1]: https://www.udemy.com/course/complete-react-developer-zero-to-mastery/ "Курс на Udemy"
+[1]: https://www.udemy.com/course/complete-react-developer-zero-to-mastery/ 'Курс на Udemy'
 
 P.S. в стадии написания

@@ -1,26 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Route } from 'react-router-dom';
 
-import SHOP_DATA from './shop.data';
+import CollectionsOverview from '../../components/collections-overview';
+import CollectionPage from '../collection';
 
-import CollectionPreview from './../../components/collection-preview';
+import './shop.styles.sass';
 
-class ShopPage extends Component {
-
-    state = {
-        collections: SHOP_DATA
-    };
-
-    render() {
-        const { collections } = this.state;
-
-        return (<div className='shop-page'>
-            {
-                collections.map(({ id, ...otherCollectionProps }) => (
-                    <CollectionPreview key={ id } { ...otherCollectionProps } />
-                ))
-            }
-        </div>);
-    }
-}
+//Route автоматически кладет в props компонента match, history, текущий url
+const ShopPage = ({ match }) => (
+  <div className="shop-page">
+    <Route exact path={`${match.path}`} component={CollectionsOverview} />
+    <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+  </div>
+);
 
 export default ShopPage;
