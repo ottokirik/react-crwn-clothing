@@ -4,8 +4,6 @@ import { Route } from 'react-router-dom';
 import CollectionsOverview from '../../components/collections-overview';
 import CollectionPage from '../collection';
 
-import './shop.styles.sass';
-
 //Route автоматически кладет в props компонента match, history, текущий url
 const ShopPage = ({ match }) => (
   <div className="shop-page">

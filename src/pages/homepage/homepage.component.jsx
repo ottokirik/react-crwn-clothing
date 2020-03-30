@@ -1,13 +1,14 @@
 import React from 'react';
 
+import { HomePageContainer } from './homepage.styles';
 import Direcory from '../../components/directory';
 
-import './homepage.styles.sass';
-
 const HomePage = () => {
-    return (<div className='homepage'>
-        <Direcory />
-    </div>);
+  return (
+    <HomePageContainer>
+      <Direcory />
+    </HomePageContainer>
+  );
 };
 
 export default HomePage;
