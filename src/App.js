@@ -1,21 +1,21 @@
-import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+import React, { Component } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
-import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/user/user.actions";
+import { connect } from 'react-redux';
+import { setCurrentUser } from './redux/user/user.actions';
 
-import { selectCurrentUser } from "./redux/user/user.selectors";
+import { selectCurrentUser } from './redux/user/user.selectors';
 
-import "./App.sass";
+import './App.sass';
 
-import Header from "./components/header";
-import HomePage from "./pages/homepage";
-import ShopPage from "./pages/shop";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up";
-import CheckoutPage from "./pages/checkout";
+import Header from './components/header';
+import HomePage from './pages/homepage';
+import ShopPage from './pages/shop';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up';
+import CheckoutPage from './pages/checkout';
 
-import { createStructuredSelector } from "reselect";
+import { createStructuredSelector } from 'reselect';
 
 class App extends Component {
   unsubscribeFromAuth = null;
@@ -24,16 +24,16 @@ class App extends Component {
     const { setCurrentUser } = this.props;
     //Подписка на событие входа/выхода пользователя в Firebase
     //возвращает функцию для закрытия соединения
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         //Событие изменения объекта
-        userRef.onSnapshot(snapShot => {
+        userRef.onSnapshot((snapShot) => {
           const { id } = snapShot;
           setCurrentUser({
             id,
-            ...snapShot.data()
+            ...snapShot.data(),
           });
         });
         //Есил нет текущего пользователя, то установить его в null
@@ -50,7 +50,7 @@ class App extends Component {
 
   render() {
     const {
-      props: { currentUser }
+      props: { currentUser },
     } = this;
     return (
       <div>
@@ -73,11 +73,11 @@ class App extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
