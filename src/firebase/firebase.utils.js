@@ -38,6 +38,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+//Добавление коллекции в БД
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd

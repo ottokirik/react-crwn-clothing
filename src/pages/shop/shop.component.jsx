@@ -12,9 +12,17 @@ import {
 
 import CollectionsOverview from '../../components/collections-overview';
 import CollectionPage from '../collection';
+import WithSpinner from '../../components/with-spinner';
+
+const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 //Route автоматически кладет в props компонента match, history, текущий url
 class ShopPage extends Component {
+  state = {
+    loading: true,
+  };
+
   unsubscribeFromSnapshot = null;
 
   componentDidMount() {
@@ -25,6 +33,7 @@ class ShopPage extends Component {
     collectionRef.onSnapshot(async (snapshot) => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
       updateCollections(collectionsMap);
+      this.setState({ loading: false });
     });
   }
 
@@ -33,13 +42,22 @@ class ShopPage extends Component {
   render() {
     const {
       props: { match },
+      state: { loading },
     } = this;
     return (
       <div className="shop-page">
-        <Route exact path={`${match.path}`} component={CollectionsOverview} />
+        <Route
+          exact
+          path={`${match.path}`}
+          render={(props) => (
+            <CollectionsOverviewWithSpinner isLoading={loading} {...props} />
+          )}
+        />
         <Route
           path={`${match.path}/:collectionId`}
-          component={CollectionPage}
+          render={(props) => (
+            <CollectionPageWithSpinner isLoading={loading} {...props} />
+          )}
         />
       </div>
     );
