@@ -3,20 +3,10 @@ import { Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
-import { createStructuredSelector } from 'reselect';
-
 import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
-import {
-  selectIsCollectionFetching,
-  selectIsCollectionsLoaded,
-} from '../../redux/shop/shop.selectors';
 
-import CollectionsOverview from '../../components/collections-overview';
-import CollectionPage from '../collection';
-import WithSpinner from '../../components/with-spinner';
-
-const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+import CollectionsOverviewContainer from '../../components/collections-overview/';
+import CollectionContainer from '../collection';
 
 //Route автоматически кладет в props компонента match, history, текущий url
 class ShopPage extends Component {
@@ -37,35 +27,26 @@ class ShopPage extends Component {
 
   render() {
     const {
-      props: { match, isFetching, isLoaded },
+      props: { match },
     } = this;
     return (
       <div className="shop-page">
         <Route
           exact
           path={`${match.path}`}
-          render={(props) => (
-            <CollectionsOverviewWithSpinner isLoading={isFetching} {...props} />
-          )}
+          component={CollectionsOverviewContainer}
         />
         <Route
           path={`${match.path}/:collectionId`}
-          render={(props) => (
-            <CollectionPageWithSpinner isLoading={!isLoaded} {...props} />
-          )}
+          component={CollectionContainer}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  isFetching: selectIsCollectionFetching,
-  isLoaded: selectIsCollectionsLoaded,
-});
-
 const mapDispatchToProps = (dispatch) => ({
   fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);
+export default connect(null, mapDispatchToProps)(ShopPage);

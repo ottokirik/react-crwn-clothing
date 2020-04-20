@@ -9,6 +9,7 @@
 - Redux
 - React-redux
 - Redux-persist
+- Redux-thunk
 - Reselect
 - Styled-components
 - SCSS
