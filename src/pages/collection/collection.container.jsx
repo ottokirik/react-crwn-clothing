@@ -7,7 +7,7 @@ import WithSpinner from '../../components/with-spinner';
 import CollectionPage from './collection.component';
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: (state) => !selectIsCollectionsLoaded(state),
+  isLoading: (state) => !selectIsCollectionsLoaded(state), //Функция используется, для того, чтобы инвертировать полученное значение
 });
 
 const CollectionContainer = compose(
