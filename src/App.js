@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.actions';
 
 import { selectCurrentUser } from './redux/user/user.selectors';
 
@@ -18,10 +16,11 @@ import CheckoutPage from './pages/checkout';
 import { createStructuredSelector } from 'reselect';
 
 class App extends Component {
-  unsubscribeFromAuth = null;
+  /*   unsubscribeFromAuth = null;
 
   componentDidMount() {
     const { setCurrentUser } = this.props;
+    
     //Подписка на событие входа/выхода пользователя в Firebase
     //возвращает функцию для закрытия соединения
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -40,14 +39,14 @@ class App extends Component {
       } else {
         setCurrentUser(userAuth);
       }
-    });
+    }); 
   }
 
   componentWillUnmount() {
     //Закрытие соединения с Firebase
     this.unsubscribeFromAuth();
   }
-
+ */
   render() {
     const {
       props: { currentUser },
@@ -76,8 +75,4 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
