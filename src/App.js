@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 
 import { connect } from 'react-redux';
 
 import { selectCurrentUser } from './redux/user/user.selectors';
+
+import { checkUserSession } from './redux/user/user.actions';
 
 import './App.sass';
 
@@ -13,40 +16,12 @@ import ShopPage from './pages/shop';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up';
 import CheckoutPage from './pages/checkout';
 
-import { createStructuredSelector } from 'reselect';
-
 class App extends Component {
-  /*   unsubscribeFromAuth = null;
-
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-    
-    //Подписка на событие входа/выхода пользователя в Firebase
-    //возвращает функцию для закрытия соединения
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        //Событие изменения объекта
-        userRef.onSnapshot((snapShot) => {
-          const { id } = snapShot;
-          setCurrentUser({
-            id,
-            ...snapShot.data(),
-          });
-        });
-        //Есил нет текущего пользователя, то установить его в null
-      } else {
-        setCurrentUser(userAuth);
-      }
-    }); 
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
-  componentWillUnmount() {
-    //Закрытие соединения с Firebase
-    this.unsubscribeFromAuth();
-  }
- */
   render() {
     const {
       props: { currentUser },
@@ -75,4 +50,8 @@ const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  checkUserSession: () => dispatch(checkUserSession()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
