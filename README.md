@@ -6,10 +6,11 @@
 ## Библиотеки используемые в проекте:
 
 - React
+- React Hooks
 - Redux
 - React-redux
 - Redux-persist
-- Redux-thunk
+- Redux-thunk, Redux-saga
 - Reselect
 - Styled-components
 - SCSS
