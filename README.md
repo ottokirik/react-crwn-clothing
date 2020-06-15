@@ -17,7 +17,7 @@
 - Redux-thunk, Redux-saga
 - Reselect
 - Styled-components
-- SCSS
+- SCSS/SASS
 - Firebase
 - Express
 
