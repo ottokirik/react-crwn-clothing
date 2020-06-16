@@ -5,7 +5,7 @@
 
 Верстка web-приложения не оптимизирована для мобильных устройств.
 
-["Живой" проект на heroku][2]
+[!["Живой" проект на heroku][3]][2]
 
 ## Библиотеки используемые в проекте:
 
@@ -23,5 +23,6 @@
 
 [1]: https://www.udemy.com/course/complete-react-developer-zero-to-mastery/ 'Курс на Udemy'
 [2]: https://vast-temple-83808.herokuapp.com/ 'Проект на heroku'
+[3]: https://raw.githubusercontent.com/ottokirik/react-crwn-clothing/master/crwn-clothing.png 'Сайт'
 
 P.S. в стадии написания.
