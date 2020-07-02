@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, lazy, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
-import CollectionsOverviewContainer from '../../components/collections-overview/';
-import CollectionContainer from '../collection';
+import Spinner from '../../components/spinner';
+
+const CollectionsOverviewContainer = lazy(() =>
+  import('../../components/collections-overview/')
+);
+const CollectionContainer = lazy(() => import('../collection'));
 
 //Route автоматически кладет в props компонента match, history, текущий url
 const ShopPage = ({ fetchCollectionsStart, match }) => {
@@ -16,15 +20,17 @@ const ShopPage = ({ fetchCollectionsStart, match }) => {
 
   return (
     <div className="shop-page">
-      <Route
-        exact
-        path={`${match.path}`}
-        component={CollectionsOverviewContainer}
-      />
-      <Route
-        path={`${match.path}/:collectionId`}
-        component={CollectionContainer}
-      />
+      <Suspense fallback={<Spinner />}>
+        <Route
+          exact
+          path={`${match.path}`}
+          component={CollectionsOverviewContainer}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          component={CollectionContainer}
+        />
+      </Suspense>
     </div>
   );
 };
