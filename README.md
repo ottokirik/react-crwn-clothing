@@ -21,6 +21,8 @@
 - Также рассмотрены:
   - Context API
   - Graphql с библиотеками react-apollo, apollo-boost
+  - Оптимизация приложения с использованием:
+    - Lazy loading и code spliting
 
 [1]: https://www.udemy.com/course/complete-react-developer-zero-to-mastery/ 'Курс на Udemy'
 [2]: https://vast-temple-83808.herokuapp.com/ 'Проект на heroku'
